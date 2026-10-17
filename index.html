@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FreelanceFlow</title>
+<style>
+  body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 16px; line-height: 1.6; color: #222; }
+  h1 { margin-bottom: 0; }
+  .tag { color: #555; margin-top: 4px; font-size: 1.1em; }
+  table { border-collapse: collapse; margin: 12px 0; }
+  td, th { border: 1px solid #ccc; padding: 6px 12px; text-align: left; }
+  a.btn { display: inline-block; background: #222; color: #fff; padding: 10px 18px; border-radius: 6px; text-decoration: none; }
+  .note { background: #f4f4f4; padding: 10px 14px; border-radius: 6px; }
+  .steps li { margin-bottom: 6px; }
+</style>
+</head>
+<body>
+
+<h1>FreelanceFlow</h1>
+<p class="tag">An AI bookkeeper for freelancers that runs on their own computer.</p>
+<p><a class="btn" href="https://github.com/Karishma-Das/freelanceflow">View code on GitHub</a></p>
+
+<!-- VIDEO GOES HERE LATER -->
+
+<h2>The problem</h2>
+<p>Freelancers handle their own money but have no finance team. Receipts and invoices pile up, income is irregular, and uploading client documents to a cloud AI tool is risky.</p>
+
+<h2>How it works</h2>
+<ol class="steps">
+  <li>Drop in receipt images or PDFs.</li>
+  <li>A local open-source model (Gemma 3 4B via Ollama) reads the amount, date and store name.</li>
+  <li>Validation rules flag missing or suspicious data for human review.</li>
+  <li>Fix anything in the table, then download a clean CSV.</li>
+  <li>See a monthly forecast and alerts for unusual spending.</li>
+</ol>
+<p><strong>Privacy:</strong> documents are read on your own computer and never leave it.</p>
+
+<h2>Measured results</h2>
+<p>Tested on 7 real receipts of mixed quality (kept private).</p>
+<table>
+  <tr><th>Field</th><th>Correct</th></tr>
+  <tr><td>Amount</td><td>6/7</td></tr>
+  <tr><td>Date</td><td>4/4</td></tr>
+  <tr><td>Store name</td><td>3/3</td></tr>
+</table>
+<p>6 of 7 records were flagged for review. Average time was about 3 minutes per receipt on a laptop CPU, with no API cost.</p>
+
+<h2>What failed</h2>
+<ul>
+  <li>One amount was read with a wrong minus sign. The validation rule caught it.</li>
+  <li>An unreadable receipt still got an amount and a wrong store name.</li>
+  <li>Store names were missed on three receipts.</li>
+</ul>
+
+<h2>Limitations</h2>
+<ul>
+  <li>Small test set and slow on a laptop CPU.</li>
+  <li>The forecast was tested on synthetic data and used a 3-month average fallback, not TabPFN.</li>
+  <li>PDF support tested on 1 file. No duplicate check or database yet.</li>
+</ul>
+
+<h2>Next steps</h2>
+<p>Local forecasting, multi-currency support, duplicate detection, late-payer alerts and a bigger test set.</p>
+
+<p class="note">This tool organizes data and gives estimates. It is not tax or accounting advice.</p>
+
+</body>
+</html>
