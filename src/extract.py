@@ -83,4 +83,6 @@ def extract(image_path):
         rec.party = head.party
     except Exception:
         pass                       # keep amount even if header step fails
+    if rec.party and rec.party.strip().lower() in ("null", "none", "n/a", ""):
+        rec.party = None
     return rec
