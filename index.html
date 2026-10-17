@@ -1,3 +1,4 @@
+cat > index.html << 'EOF'
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,65 +6,105 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FreelanceFlow</title>
 <style>
-  body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 16px; line-height: 1.6; color: #222; }
-  h1 { margin-bottom: 0; }
-  .tag { color: #555; margin-top: 4px; font-size: 1.1em; }
-  table { border-collapse: collapse; margin: 12px 0; }
-  td, th { border: 1px solid #ccc; padding: 6px 12px; text-align: left; }
-  a.btn { display: inline-block; background: #222; color: #fff; padding: 10px 18px; border-radius: 6px; text-decoration: none; }
-  .note { background: #f4f4f4; padding: 10px 14px; border-radius: 6px; }
-  .steps li { margin-bottom: 6px; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; color: #1f2937; background: #f8fafc; line-height: 1.6; }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+  header { background: linear-gradient(135deg, #1e3a8a, #2563eb); color: #fff; padding: 56px 0 48px; }
+  header h1 { margin: 0; font-size: 2.6em; }
+  header p { font-size: 1.2em; margin: 8px 0 24px; opacity: .95; }
+  .btn { display: inline-block; background: #fff; color: #1e3a8a; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; margin-right: 8px; }
+  .badges span { display: inline-block; background: rgba(255,255,255,.18); padding: 4px 12px; border-radius: 20px; font-size: .85em; margin: 16px 6px 0 0; }
+  section { padding: 28px 0 4px; }
+  h2 { margin: 0 0 12px; font-size: 1.5em; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; }
+  .card { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 16px; }
+  .stat { text-align: center; }
+  .stat b { display: block; font-size: 2em; color: #2563eb; }
+  .step b { color: #2563eb; }
+  .video { position: relative; padding-bottom: 56.25%; height: 0; margin: 8px 0; }
+  .video iframe { position: absolute; width: 100%; height: 100%; border: 0; border-radius: 12px; }
+  ul { padding-left: 20px; }
+  .fail { border-left: 4px solid #ef4444; }
+  .note { background: #eef2ff; border-radius: 10px; padding: 12px 16px; margin: 24px 0; }
+  footer { text-align: center; color: #6b7280; padding: 24px 0 40px; font-size: .9em; }
 </style>
 </head>
 <body>
 
-<h1>FreelanceFlow</h1>
-<p class="tag">An AI bookkeeper for freelancers that runs on their own computer.</p>
-<p><a class="btn" href="https://github.com/Karishma-Das/freelanceflow">View code on GitHub</a></p>
+<header>
+  <div class="wrap">
+    <h1>FreelanceFlow</h1>
+    <p>An AI bookkeeper for freelancers that runs on their own computer.</p>
+    <a class="btn" href="https://github.com/Karishma-Das/freelanceflow">View code on GitHub</a>
+    <div class="badges">
+      <span>Local AI (Gemma 3 4B)</span><span>Documents never leave the laptop</span><span>Built with Python and Streamlit</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
 
 <!-- VIDEO GOES HERE LATER -->
 
-<h2>The problem</h2>
-<p>Freelancers handle their own money but have no finance team. Receipts and invoices pile up, income is irregular, and uploading client documents to a cloud AI tool is risky.</p>
+<section>
+  <h2>The problem</h2>
+  <div class="card">Freelancers handle their own money but have no finance team. Receipts and invoices pile up, income is irregular, and uploading client documents to a cloud AI tool is risky.</div>
+</section>
 
-<h2>How it works</h2>
-<ol class="steps">
-  <li>Drop in receipt images or PDFs.</li>
-  <li>A local open-source model (Gemma 3 4B via Ollama) reads the amount, date and store name.</li>
-  <li>Validation rules flag missing or suspicious data for human review.</li>
-  <li>Fix anything in the table, then download a clean CSV.</li>
-  <li>See a monthly forecast and alerts for unusual spending.</li>
-</ol>
-<p><strong>Privacy:</strong> documents are read on your own computer and never leave it.</p>
+<section>
+  <h2>How it works</h2>
+  <div class="grid">
+    <div class="card step"><b>1. Upload</b><br>Drop in receipt images or PDFs.</div>
+    <div class="card step"><b>2. Read</b><br>A local model extracts amount, date and store name.</div>
+    <div class="card step"><b>3. Check</b><br>Validation rules flag doubtful records for review.</div>
+    <div class="card step"><b>4. Export</b><br>Fix the table, then download a clean CSV.</div>
+    <div class="card step"><b>5. Plan</b><br>See a monthly forecast and unusual-spending alerts.</div>
+  </div>
+</section>
 
-<h2>Measured results</h2>
-<p>Tested on 7 real receipts of mixed quality (kept private).</p>
-<table>
-  <tr><th>Field</th><th>Correct</th></tr>
-  <tr><td>Amount</td><td>6/7</td></tr>
-  <tr><td>Date</td><td>4/4</td></tr>
-  <tr><td>Store name</td><td>3/3</td></tr>
-</table>
-<p>6 of 7 records were flagged for review. Average time was about 3 minutes per receipt on a laptop CPU, with no API cost.</p>
+<section>
+  <h2>Measured results</h2>
+  <p>Tested on 7 real receipts of mixed quality (kept private).</p>
+  <div class="grid">
+    <div class="card stat"><b>6/7</b>amounts correct</div>
+    <div class="card stat"><b>4/4</b>dates correct</div>
+    <div class="card stat"><b>3/3</b>store names correct</div>
+    <div class="card stat"><b>6 of 7</b>flagged for review</div>
+    <div class="card stat"><b>~3 min</b>per receipt on CPU</div>
+  </div>
+</section>
 
-<h2>What failed</h2>
-<ul>
-  <li>One amount was read with a wrong minus sign. The validation rule caught it.</li>
-  <li>An unreadable receipt still got an amount and a wrong store name.</li>
-  <li>Store names were missed on three receipts.</li>
-</ul>
+<section>
+  <h2>What failed</h2>
+  <div class="card fail">
+    <ul>
+      <li>One amount was read with a wrong minus sign. The validation rule caught it.</li>
+      <li>An unreadable receipt still got an amount and a wrong store name.</li>
+      <li>Store names were missed on three receipts.</li>
+    </ul>
+  </div>
+</section>
 
-<h2>Limitations</h2>
-<ul>
-  <li>Small test set and slow on a laptop CPU.</li>
-  <li>The forecast was tested on synthetic data and used a 3-month average fallback, not TabPFN.</li>
-  <li>PDF support tested on 1 file. No duplicate check or database yet.</li>
-</ul>
+<section>
+  <h2>Limitations</h2>
+  <div class="card">
+    <ul>
+      <li>Small test set, and slow on a laptop CPU.</li>
+      <li>The forecast was tested on synthetic data and used a 3-month average fallback, not TabPFN.</li>
+      <li>PDF support tested on 1 file. No duplicate check or database yet.</li>
+    </ul>
+  </div>
+</section>
 
-<h2>Next steps</h2>
-<p>Local forecasting, multi-currency support, duplicate detection, late-payer alerts and a bigger test set.</p>
+<section>
+  <h2>Next steps</h2>
+  <div class="card">Local forecasting, multi-currency support, duplicate detection, late-payer alerts and a bigger test set.</div>
+</section>
 
-<p class="note">This tool organizes data and gives estimates. It is not tax or accounting advice.</p>
+<div class="note">This tool organizes data and gives estimates. It is not tax or accounting advice.</div>
 
+</div>
+<footer>FreelanceFlow, built for Hacktoberfest 2026</footer>
 </body>
 </html>
+EOF
